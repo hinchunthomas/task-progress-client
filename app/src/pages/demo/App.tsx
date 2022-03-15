@@ -1,23 +1,32 @@
 import React from 'react';
 import logo from '../../assets/icons/logo.svg';
 import './App.css';
+import Form from '../../components/form/form'
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <div className="App-title-container">
+          <img
+            src={ logo }
+            className="App-logo"
+            alt="logo"
+          />
+          <div className="App-title">
+            Task Progress Report Generation
+          </div>
+          <img
+            src={ logo }
+            className="App-logo"
+            alt="logo"
+          />
+        </div>
+        <div className="App-description">
+          Add the link of your task(s) and the report will be generated for you! <br /><br />
+          Good luck on your task! <br />
+        </div>
+        <Form />
       </header>
     </div>
   );
