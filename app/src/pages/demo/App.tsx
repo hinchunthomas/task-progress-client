@@ -5,10 +5,6 @@ import Form from '../../components/form/form'
 
 function App() {
 
-  function checkTaskList(tasksJSON: string) {
-    console.log({ tasksJSON })
-  }
-
   return (
     <div className="App">
       <header className="App-header">
@@ -33,7 +29,7 @@ function App() {
           Good luck on your task! <br />
         </div>
         {/* Pass props to the child components */}
-        <Form checkTaskList={ checkTaskList } />
+        <Form />
       </header>
     </div>
   );

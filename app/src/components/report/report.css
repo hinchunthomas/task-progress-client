@@ -1,0 +1,29 @@
+.report-container {
+    background-color: #ffffff;
+    color: #000000;
+    width: 40vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.report-container > span {
+    text-align: left;
+    display: flex;
+}
+
+.report-task-container {
+    line-height: 30px;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    width: 100%;
+}
+
+.report-task-status-header {
+    width: 100%;
+    display: flex;
+}
+
