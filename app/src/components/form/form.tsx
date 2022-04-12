@@ -9,6 +9,7 @@ interface Task {
     taskLink: string;
     taskTitle: string;
     taskStatus: string;
+    isJIRALink: boolean;
 }
 
 // TO-LEARN: Initial props to the component (Can be variable / function)
@@ -64,21 +65,14 @@ export default function Form() {
         const link = taskLinkRef.current?.value ?? ''
         const status = taskStatusRef.current?.value ?? ''
         const title = taskTitle.current?.value ?? ''
-        if (link === '' || status === '' || title === '') {
+        if (status === '' || title === '') {
             setErrorMessage('Please fill in all information')
             console.error('error: Please fill in all information')
             return
         }
         const lastSlashIndex = link.lastIndexOf('/');
         const code = link.substring(lastSlashIndex+1);
-        if( lastSlashIndex === -1 || !code.match("\\w+") ){
-            /* file has no extension */
-            setErrorMessage('Task Hyperlink is not correct')
-            console.error('error: Link is not correct')
-            return
-        }
-        
-        setTaskList([...taskList, { taskCode: code, taskLink: link, taskTitle: title, taskStatus: status } ])
+        setTaskList([...taskList, { taskCode: code, taskLink: link, taskTitle: title, taskStatus: status, isJIRALink: !(lastSlashIndex === -1 || !code.match("\\w+")) } ])
     }
 
     function clearAllTask() {

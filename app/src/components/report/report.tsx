@@ -6,6 +6,7 @@ interface Task {
     taskLink: string;
     taskTitle: string;
     taskStatus: string;
+    isJIRALink: boolean;
 }
 
 
@@ -26,42 +27,60 @@ export default function Report (props: { taskList: Array<Task> }) {
                         <br />
                     </div>
                 }
-                {
-                    props.taskList.filter(task => task.taskStatus === 'to-do').length > 0 && props.taskList.filter(task => task.taskStatus === 'to-do').map((task, index) => {
-                        return(
-                            <div className="report-task-container">
-                                <span className="report-task-status-header"><b>To Do:</b></span>
+                <div className="report-task-container">
+                    { props.taskList.filter(task => task.taskStatus === 'to-do').length > 0 && <span className="report-task-status-header"><b>To Do:</b></span> }
+                    {
+                        props.taskList.filter(task => task.taskStatus === 'to-do').length > 0 && props.taskList.filter(task => task.taskStatus === 'to-do').map((task, index) => {
+                            return(
+                                    <span key={index}>
+                                        {
+                                            task.isJIRALink
+                                                ? <>
+                                                    <a target="_blank" href={task.taskLink} rel="noreferrer">{task.taskCode}</a>&nbsp; - &nbsp;{task.taskTitle}
+                                                </>
+                                                : <>{task.taskTitle}</>
+                                        }
+                                    </span>
+                            )
+                        })
+                    }
+                </div>
+                <div className="report-task-container">
+                    { props.taskList.filter(task => task.taskStatus === 'in-progress').length > 0 && <span className="report-task-status-header"><b>In Progress:</b></span> }
+                    {
+                        props.taskList.filter(task => task.taskStatus === 'in-progress').length > 0 && props.taskList.filter(task => task.taskStatus === 'in-progress').map((task, index) => {
+                            return(
                                 <span key={index}>
-                                    <a target="_blank" href={task.taskLink} rel="noreferrer">{task.taskCode}</a>&nbsp; - &nbsp;{task.taskTitle}
+                                {
+                                    task.isJIRALink
+                                        ? <>
+                                            <a target="_blank" href={task.taskLink} rel="noreferrer">{task.taskCode}</a>&nbsp; - &nbsp;{task.taskTitle}
+                                        </>
+                                        : <>{task.taskTitle}</>
+                                }
                                 </span>
-                            </div>
-                        )
-                    })
-                }
-                {
-                    props.taskList.filter(task => task.taskStatus === 'in-progress').length > 0 && props.taskList.filter(task => task.taskStatus === 'in-progress').map((task, index) => {
-                        return(
-                            <div className="report-task-container">
-                                <span className="report-task-status-header"><b>In Progress:</b></span> 
-                                <span key={index}>
-                                    <a target="_blank" href={task.taskLink} rel="noreferrer">{task.taskCode}</a>&nbsp; - &nbsp;{task.taskTitle}
-                                </span>
-                            </div>
-                        )
-                    })
-                }
-                {
-                    props.taskList.filter(task => task.taskStatus === 'done').length > 0 && props.taskList.filter(task => task.taskStatus === 'done').map((task, index) => {
-                        return(
-                            <div className="report-task-container">
-                                <span className="report-task-status-header"><b>Done:</b></span>
-                                <span key={index}>
-                                    <a target="_blank" href={task.taskLink} rel="noreferrer">{task.taskCode}</a>&nbsp; - &nbsp;{task.taskTitle}
-                                </span>
-                            </div>
-                        )
-                    })
-                }
+                            )
+                        })
+                    }
+                </div>
+                <div className="report-task-container">
+                    { props.taskList.filter(task => task.taskStatus === 'done').length > 0 && <span className="report-task-status-header"><b>Done:</b></span> }
+                    {
+                        props.taskList.filter(task => task.taskStatus === 'done').length > 0 && props.taskList.filter(task => task.taskStatus === 'done').map((task, index) => {
+                            return(
+                                    <span key={index}>
+                                    {
+                                        task.isJIRALink
+                                            ? <>
+                                                <a target="_blank" href={task.taskLink} rel="noreferrer">{task.taskCode}</a>&nbsp; - &nbsp;{task.taskTitle}
+                                            </>
+                                            : <>{task.taskTitle}</>
+                                    }
+                                    </span>
+                            )
+                        })
+                    }
+                </div>
                 {
                     props.taskList.length > 0 &&
                     <div className="report-task-container">
